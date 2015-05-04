@@ -114,17 +114,17 @@
           <tbody>
             <tr>
               <td>
-                <pre><code>\
-[["2014-09-08", -5.69, "e348925bca"],
-["2014-09-08", -30.0, "08ab8e04b1"],
+                <pre><code>
+<strong>[["2014-09-08", -5.69, "e348925bca"],</strong>
+<strong>["2014-09-08", -30.0, "08ab8e04b1"],</strong>
 ["2014-09-08", -7.25, "ce3f971476"],
 ["2014-09-08", -54.9, "7195eb1043"],
 ["2014-09-09", -16.24, "de0630adab"],
 ["2014-09-10", -16.34, "77ff4bd783"],
 ["2014-09-11", -32.98, "a0c0f831e4"],
 ["2014-09-11", -75.0, "debd43bc7f"],
-["2014-09-11", -5.69, "9bb784b332"],
-["2014-09-11", -8.19, "c66d7eb43c"],
+<strong>["2014-09-11", -5.69, "9bb784b332"],</strong>
+<strong>["2014-09-11", -8.19, "c66d7eb43c"],</strong>
 ["2014-09-12", -5.69, "6f63ac2d16"],
 ["2014-09-12", -201.0, "9ff6034ba9"],
 ["2014-09-12", -80.0, "746c3354cf"],
@@ -136,19 +136,19 @@
 
               <td>
                 <pre><code>
-["2014-09-08", -54.9, "7195eb1043"],
-["2014-09-08", -7.25, "ce3f971476"],
+<strong>["2014-09-08", -54.9, "7195eb1043"],</strong>
+<strong>["2014-09-08", -7.25, "ce3f971476"],</strong>
 ["2014-09-08", -30.0, "08ab8e04b1"],
 ["2014-09-08", -5.69, "e348925bca"],
 ["2014-09-09", -16.24, "de0630adab"],
 ["2014-09-10", -16.34, "77ff4bd783"],
-["2014-09-11", -75.0, "debd43bc7f"],
-["2014-09-11", -32.98, "a0c0f831e4"],
+<strong>["2014-09-11", -75.0, "debd43bc7f"],</strong>
+<strong>["2014-09-11", -32.98, "a0c0f831e4"],</strong>
 ["2014-09-11", -8.19, "c66d7eb43c"],
 ["2014-09-11", -5.69, "9bb784b332"],
-["2014-09-12", -80.0, "746c3354cf"],
+<strong>["2014-09-12", -80.0, "746c3354cf"],</strong>
 ["2014-09-12", -201.0, "9ff6034ba9"],
-["2014-09-12", -5.69, "6f63ac2d16"],
+<strong>["2014-09-12", -5.69, "6f63ac2d16"],</strong>
 ["2014-09-13", -680.0, "0d7f128a46"],
 ["2014-09-13", 2000.0, "9297d662dc"],
 ["2014-09-14", -12.9, "b994d3b9b8"]
@@ -157,6 +157,27 @@
             </tr>
           </tbody>
         </table>
+        <p>Hey, what's wrong with my <a href="#">Magic</a>?</p>
+        <p>Hey Ruby, Y R U <a href="#">DOING</a>?</p>
+        <p>After some investigation over the <a href="http://svn.ruby-lang.org/repos/ruby/tags/v2_2_2/ChangeLog">ChangeLog</a> of <strong>Ruby 2.2.2</strong>. I found this:
+          <pre>
+            Sat Feb  8 21:44:07 2014  Masaki Matsushita  <glass.saga@gmail.com>
+            * configure.in: check qsort_r(3) and whether it is GNU version.
+              BSD version has different prototype.
+            * util.h: use qsort_r() as ruby_qsort() if it is GNU version.
+            * util.c: define ruby_qsort() if needed.
+          </pre>    
+        </p>
+        <p>Not, really sure this is the case, or may be some <strong>CFLAGS</strong>O2 replaces with O3, for better optimizations on new CPUs</p>
+        <p>Only GNU users were affected by this behavior. <strong>I repeat no OSX hipsters were hurt while writing this post.</strong></p>
+        <p>And of course the solution was quite simple and intuitive:</p>
+        <pre><code>
+          items_list.sort_by!.with_index do |item, index|
+            "#{item.made_on}-#{item.extra[:time]}-#{index}"
+          end
+        </code></pre>
+        <p>Thanks for your time, it's late and I'm <b>out</b>.</p>
+        <p><em>Cheers!</em></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/wipxj3">wipxj3</a></p>
