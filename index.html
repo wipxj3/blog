@@ -26,9 +26,7 @@
           I'll try to show some interesting thing I found while playing with a gem parsing CSV and XLS files.
         </p>
 
-        <p>
-          As we all now the simplest way to do it, is parse line by line and adding in an Array and the result is:
-        </p>
+        <p>As we all now the simplest way to do it, is parse line by line, adding in an Array; the result:</p>
 
         <pre><code>
         $ pry> items_list.map {|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
@@ -54,11 +52,13 @@
         <p>This is the result obtained on Ruby 2.1.x. Unsorted reverse list, just the same as in the file.</p>
         <img src="images/original.png">
         <br><br>
-        <p>But we need a sorted array! And the most obvious way to sort it - is by <code>item.made_on</code></p>
-        <p>
-        We call a ruby method sort_by, and of course with a BANG!!!
-        <pre><code>items_list.sort_by! {|item| item.made_on}</code></pre>
+        
+        <p>But we need a sorted array! And the most obvious way to sort is by "item.made_on".</p>
+        
+        <p>We call a ruby method sort_by, and of course with a <a href="https://www.youtube.com/watch?v=T5Xl0Qry-hA">BANG!!! BANG!!!</a>
+          <pre><code>items_list.sort_by! {|item| item.made_on}</code></pre>
         </p>
+        
         <p>And the result is quite predictable:</p>
         <pre>
           <code>
@@ -82,6 +82,8 @@
             => nil
           </code> 
         </pre>
+      
+        
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/wipxj3">wipxj3</a></p>
