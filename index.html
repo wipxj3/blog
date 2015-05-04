@@ -53,12 +53,11 @@
 
         <p>This is the result obtained on Ruby 2.1.x. Unsorted reverse list, just the same as in the file.</p>
         <img src="images/original.png">
-        <p>But we need a sorted array! And the most obvious way to sort it - is by <pre>item.made_on</pre></p>
+        <br><br>
+        <p>But we need a sorted array! And the most obvious way to sort it - is by <code>item.made_on</code></p>
         <p>
         We call a ruby method sort_by, and of course with a BANG!!!
-        <pre>
-          <code>items_list.sort_by! {|item| item.made_on}</code>
-        </pre>
+        <pre><code>items_list.sort_by! {|item| item.made_on}</code></pre>
         </p>
         <p>And the result is quite predictable:</p>
         <pre>
