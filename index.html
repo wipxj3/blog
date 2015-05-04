@@ -29,23 +29,23 @@
         <p>As we all now the simplest way to do it, is parse line by line, adding in an Array; the result:</p>
 
         <pre><code>
-        $ pry> items_list.map {|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
-        [["2014-09-14", -12.9, "b994d3b9b8"],
-         ["2014-09-13", -680.0, "0d7f128a46"],
-         ["2014-09-13", 2000.0, "9297d662dc"],
-         ["2014-09-12", -80.0, "746c3354cf"],
-         ["2014-09-12", -201.0, "9ff6034ba9"],
-         ["2014-09-12", -5.69, "6f63ac2d16"],
-         ["2014-09-11", -75.0, "debd43bc7f"],
-         ["2014-09-11", -32.98, "a0c0f831e4"],
-         ["2014-09-11", -8.19, "c66d7eb43c"],
-         ["2014-09-11", -5.69, "9bb784b332"],
-         ["2014-09-10", -16.34, "77ff4bd783"],
-         ["2014-09-09", -16.24, "de0630adab"],
-         ["2014-09-08", -54.9, "7195eb1043"],
-         ["2014-09-08", -7.25, "ce3f971476"],
-         ["2014-09-08", -30.0, "08ab8e04b1"],
-         ["2014-09-08", -5.69, "e348925bca"]]
+$ pry> items_list.map {|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
+[["2014-09-14", -12.9, "b994d3b9b8"],
+ ["2014-09-13", -680.0, "0d7f128a46"],
+ ["2014-09-13", 2000.0, "9297d662dc"],
+ ["2014-09-12", -80.0, "746c3354cf"],
+ ["2014-09-12", -201.0, "9ff6034ba9"],
+ ["2014-09-12", -5.69, "6f63ac2d16"],
+ ["2014-09-11", -75.0, "debd43bc7f"],
+ ["2014-09-11", -32.98, "a0c0f831e4"],
+ ["2014-09-11", -8.19, "c66d7eb43c"],
+ ["2014-09-11", -5.69, "9bb784b332"],
+ ["2014-09-10", -16.34, "77ff4bd783"],
+ ["2014-09-09", -16.24, "de0630adab"],
+ ["2014-09-08", -54.9, "7195eb1043"],
+ ["2014-09-08", -7.25, "ce3f971476"],
+ ["2014-09-08", -30.0, "08ab8e04b1"],
+ ["2014-09-08", -5.69, "e348925bca"]]
         </code></pre>
 
         <p>This is the result obtained on <strong>Ruby 2.1.x</strong>. Unsorted reverse list, just the same as in the file.</p>
@@ -61,23 +61,23 @@
         <p>And the result is quite predictable:</p>
         <pre>
           <code>
-            $ pry> items_list.map{|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
-            [["2014-09-08", -5.69, "e348925bca"],
-            ["2014-09-08", -30.0, "08ab8e04b1"],
-            ["2014-09-08", -7.25, "ce3f971476"],
-            ["2014-09-08", -54.9, "7195eb1043"],
-            ["2014-09-09", -16.24, "de0630adab"],
-            ["2014-09-10", -16.34, "77ff4bd783"],
-            ["2014-09-11", -32.98, "a0c0f831e4"],
-            ["2014-09-11", -75.0, "debd43bc7f"],
-            ["2014-09-11", -5.69, "9bb784b332"],
-            ["2014-09-11", -8.19, "c66d7eb43c"],
-            ["2014-09-12", -5.69, "6f63ac2d16"],
-            ["2014-09-12", -201.0, "9ff6034ba9"],
-            ["2014-09-12", -80.0, "746c3354cf"],
-            ["2014-09-13", -680.0, "0d7f128a46"],
-            ["2014-09-13", 2000.0, "9297d662dc"],
-            ["2014-09-14", -12.9, "b994d3b9b8"]]
+$ pry> items_list.map{|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
+[["2014-09-08", -5.69, "e348925bca"],
+["2014-09-08", -30.0, "08ab8e04b1"],
+["2014-09-08", -7.25, "ce3f971476"],
+["2014-09-08", -54.9, "7195eb1043"],
+["2014-09-09", -16.24, "de0630adab"],
+["2014-09-10", -16.34, "77ff4bd783"],
+["2014-09-11", -32.98, "a0c0f831e4"],
+["2014-09-11", -75.0, "debd43bc7f"],
+["2014-09-11", -5.69, "9bb784b332"],
+["2014-09-11", -8.19, "c66d7eb43c"],
+["2014-09-12", -5.69, "6f63ac2d16"],
+["2014-09-12", -201.0, "9ff6034ba9"],
+["2014-09-12", -80.0, "746c3354cf"],
+["2014-09-13", -680.0, "0d7f128a46"],
+["2014-09-13", 2000.0, "9297d662dc"],
+["2014-09-14", -12.9, "b994d3b9b8"]]
           </code> 
         </pre>
       
@@ -85,23 +85,23 @@
         <p>As I suspected there is no difference in line by line parsing and adding to a list.</p>
         <p>Let's try to sort it now, and analyze the result:</p>
         <pre><code>
-          $ pry> items_list.map{|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
-          ["2014-09-08", -54.9, "7195eb1043"],
-          ["2014-09-08", -7.25, "ce3f971476"],
-          ["2014-09-08", -30.0, "08ab8e04b1"],
-          ["2014-09-08", -5.69, "e348925bca"],
-          ["2014-09-09", -16.24, "de0630adab"],
-          ["2014-09-10", -16.34, "77ff4bd783"],
-          ["2014-09-11", -75.0, "debd43bc7f"],
-          ["2014-09-11", -32.98, "a0c0f831e4"],
-          ["2014-09-11", -8.19, "c66d7eb43c"],
-          ["2014-09-11", -5.69, "9bb784b332"],
-          ["2014-09-12", -80.0, "746c3354cf"],
-          ["2014-09-12", -201.0, "9ff6034ba9"],
-          ["2014-09-12", -5.69, "6f63ac2d16"],
-          ["2014-09-13", -680.0, "0d7f128a46"],
-          ["2014-09-13", 2000.0, "9297d662dc"],
-          ["2014-09-14", -12.9, "b994d3b9b8"]
+$ pry> items_list.map{|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
+["2014-09-08", -54.9, "7195eb1043"],
+["2014-09-08", -7.25, "ce3f971476"],
+["2014-09-08", -30.0, "08ab8e04b1"],
+["2014-09-08", -5.69, "e348925bca"],
+["2014-09-09", -16.24, "de0630adab"],
+["2014-09-10", -16.34, "77ff4bd783"],
+["2014-09-11", -75.0, "debd43bc7f"],
+["2014-09-11", -32.98, "a0c0f831e4"],
+["2014-09-11", -8.19, "c66d7eb43c"],
+["2014-09-11", -5.69, "9bb784b332"],
+["2014-09-12", -80.0, "746c3354cf"],
+["2014-09-12", -201.0, "9ff6034ba9"],
+["2014-09-12", -5.69, "6f63ac2d16"],
+["2014-09-13", -680.0, "0d7f128a46"],
+["2014-09-13", 2000.0, "9297d662dc"],
+["2014-09-14", -12.9, "b994d3b9b8"]
         </code></pre>
         <p>As we can see, there is quite a difference between our results, <strong>Y???</strong></p>
         <table>
@@ -161,20 +161,20 @@
         <p>Hey Ruby, Y R U <a href="#">DOING</a>?</p>
         <p>After some investigation over the <a href="http://svn.ruby-lang.org/repos/ruby/tags/v2_2_2/ChangeLog">ChangeLog</a> of <strong>Ruby 2.2.2</strong>. I found this:
           <pre>
-            Sat Feb  8 21:44:07 2014  Masaki Matsushita  <glass.saga@gmail.com>
-            * configure.in: check qsort_r(3) and whether it is GNU version.
-              BSD version has different prototype.
-            * util.h: use qsort_r() as ruby_qsort() if it is GNU version.
-            * util.c: define ruby_qsort() if needed.
+Sat Feb  8 21:44:07 2014  Masaki Matsushita  <glass.saga@gmail.com>
+* configure.in: check qsort_r(3) and whether it is GNU version.
+  BSD version has different prototype.
+* util.h: use qsort_r() as ruby_qsort() if it is GNU version.
+* util.c: define ruby_qsort() if needed.
           </pre>    
         </p>
         <p>Not, really sure this is the case, or may be some <strong>CFLAGS=</strong>O2 replaced with O3, for better optimizations on new CPUs.</p>
         <p>Only GNU users were affected by this behavior. <strong>I repeat no OSX hipsters were hurt while writing this post.</strong></p>
         <p>And of course the solution was quite simple and intuitive:</p>
         <pre><code>
-          items_list.sort_by!.with_index do |item, index|
-            "#{item.made_on}-#{item.extra[:time]}-#{index}"
-          end
+items_list.sort_by!.with_index do |item, index|
+  "#{item.made_on}-#{item.extra[:time]}-#{index}"
+end
         </code></pre>
         <p>Thanks for your time, it's late and I'm <b>out</b>.</p>
         <p><em>Cheers!</em></p>
