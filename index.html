@@ -21,7 +21,7 @@
         <h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ruby sorting 2.1.x vs 2.2.x</h3>
 
         <p>
-          Hi, folks. 
+          Hi, folks.
           <br><br>
           I'll try to show some interesting thing I found while playing with a gem parsing CSV and XLS files.
         </p>
@@ -51,13 +51,13 @@ $ pry> items_list.map {|item| [item.made_on, item.amount, item.checksum[0..9]]};
         <p>This is the result obtained on <strong>Ruby 2.1.x</strong>. Unsorted reverse list, just the same as in the file.</p>
         <img src="images/original.png">
         <br><br>
-        
+
         <p>But we need a sorted array! And the most obvious way to sort is by "item.made_on".</p>
-        
+
         <p>We call a ruby method sort_by, and of course with a <a href="https://www.youtube.com/watch?v=T5Xl0Qry-hA">BANG!!! BANG!!!</a>
           <pre><code>items_list.sort_by! {|item| item.made_on}</code></pre>
         </p>
-        
+
         <p>And the result is quite predictable:</p>
         <pre>
           <code>
@@ -78,9 +78,9 @@ $ pry> items_list.map{|item| [item.made_on, item.amount, item.checksum[0..9]]};n
 ["2014-09-13", -680.0, "0d7f128a46"],
 ["2014-09-13", 2000.0, "9297d662dc"],
 ["2014-09-14", -12.9, "b994d3b9b8"]]
-          </code> 
+          </code>
         </pre>
-      
+
         <p>Now we'll try do to the same thing but on <strong>Ruby 2.2.x</strong></p>
         <p>As I suspected there is no difference in line by line parsing and adding to a list.</p>
         <p>Let's try to sort it now, and analyze the result:</p>
@@ -166,7 +166,7 @@ Sat Feb  8 21:44:07 2014  Masaki Matsushita  <glass.saga@gmail.com>
   BSD version has different prototype.
 * util.h: use qsort_r() as ruby_qsort() if it is GNU version.
 * util.c: define ruby_qsort() if needed.
-          </pre>    
+          </pre>
         </p>
         <p>Not, really sure this is the case, or may be some <strong>CFLAGS=</strong>O2 replaced with O3, for better optimizations on new CPUs.</p>
         <p>Only GNU users were affected by this behavior. <strong>I repeat no OSX hipsters were hurt while writing this post.</strong></p>
@@ -185,6 +185,6 @@ end
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+
   </body>
 </html>
