@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -256,4 +257,195 @@
 
 </body>
 
+=======
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>wipxj3 Blog</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Talk tech</h1>
+      </header>
+      <section>
+        <h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ruby sorting 2.1.x vs 2.2.x</h3>
+
+        <p>
+          Hi, folks. 
+          <br><br>
+          I'll try to show some interesting thing I found while playing with a gem parsing CSV and XLS files.
+        </p>
+
+        <p>As we all now the simplest way to do it, is parse line by line, adding in an Array; the result:</p>
+
+        <pre><code>
+$ pry> items_list.map {|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
+[["2014-09-14", -12.9, "b994d3b9b8"],
+ ["2014-09-13", -680.0, "0d7f128a46"],
+ ["2014-09-13", 2000.0, "9297d662dc"],
+ ["2014-09-12", -80.0, "746c3354cf"],
+ ["2014-09-12", -201.0, "9ff6034ba9"],
+ ["2014-09-12", -5.69, "6f63ac2d16"],
+ ["2014-09-11", -75.0, "debd43bc7f"],
+ ["2014-09-11", -32.98, "a0c0f831e4"],
+ ["2014-09-11", -8.19, "c66d7eb43c"],
+ ["2014-09-11", -5.69, "9bb784b332"],
+ ["2014-09-10", -16.34, "77ff4bd783"],
+ ["2014-09-09", -16.24, "de0630adab"],
+ ["2014-09-08", -54.9, "7195eb1043"],
+ ["2014-09-08", -7.25, "ce3f971476"],
+ ["2014-09-08", -30.0, "08ab8e04b1"],
+ ["2014-09-08", -5.69, "e348925bca"]]
+        </code></pre>
+
+        <p>This is the result obtained on <strong>Ruby 2.1.x</strong>. Unsorted reverse list, just the same as in the file.</p>
+        <img src="images/original.png">
+        <br><br>
+        
+        <p>But we need a sorted array! And the most obvious way to sort is by "item.made_on".</p>
+        
+        <p>We call a ruby method sort_by, and of course with a <a href="https://www.youtube.com/watch?v=T5Xl0Qry-hA">BANG!!! BANG!!!</a>
+          <pre><code>items_list.sort_by! {|item| item.made_on}</code></pre>
+        </p>
+        
+        <p>And the result is quite predictable:</p>
+        <pre>
+          <code>
+$ pry> items_list.map{|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
+[["2014-09-08", -5.69, "e348925bca"],
+["2014-09-08", -30.0, "08ab8e04b1"],
+["2014-09-08", -7.25, "ce3f971476"],
+["2014-09-08", -54.9, "7195eb1043"],
+["2014-09-09", -16.24, "de0630adab"],
+["2014-09-10", -16.34, "77ff4bd783"],
+["2014-09-11", -32.98, "a0c0f831e4"],
+["2014-09-11", -75.0, "debd43bc7f"],
+["2014-09-11", -5.69, "9bb784b332"],
+["2014-09-11", -8.19, "c66d7eb43c"],
+["2014-09-12", -5.69, "6f63ac2d16"],
+["2014-09-12", -201.0, "9ff6034ba9"],
+["2014-09-12", -80.0, "746c3354cf"],
+["2014-09-13", -680.0, "0d7f128a46"],
+["2014-09-13", 2000.0, "9297d662dc"],
+["2014-09-14", -12.9, "b994d3b9b8"]]
+          </code> 
+        </pre>
+      
+        <p>Now we'll try do to the same thing but on <strong>Ruby 2.2.x</strong></p>
+        <p>As I suspected there is no difference in line by line parsing and adding to a list.</p>
+        <p>Let's try to sort it now, and analyze the result:</p>
+        <pre><code>
+$ pry> items_list.map{|item| [item.made_on, item.amount, item.checksum[0..9]]};nil
+["2014-09-08", -54.9, "7195eb1043"],
+["2014-09-08", -7.25, "ce3f971476"],
+["2014-09-08", -30.0, "08ab8e04b1"],
+["2014-09-08", -5.69, "e348925bca"],
+["2014-09-09", -16.24, "de0630adab"],
+["2014-09-10", -16.34, "77ff4bd783"],
+["2014-09-11", -75.0, "debd43bc7f"],
+["2014-09-11", -32.98, "a0c0f831e4"],
+["2014-09-11", -8.19, "c66d7eb43c"],
+["2014-09-11", -5.69, "9bb784b332"],
+["2014-09-12", -80.0, "746c3354cf"],
+["2014-09-12", -201.0, "9ff6034ba9"],
+["2014-09-12", -5.69, "6f63ac2d16"],
+["2014-09-13", -680.0, "0d7f128a46"],
+["2014-09-13", 2000.0, "9297d662dc"],
+["2014-09-14", -12.9, "b994d3b9b8"]
+        </code></pre>
+        <p>As we can see, there is quite a difference between our results, <strong>Y???</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <td>Ruby 2.1.x</td>
+              <td>Ruby 2.2.x</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <pre><code>
+<strong>[["2014-09-08", -5.69, "e348925bca"],</strong>
+<strong>["2014-09-08", -30.0, "08ab8e04b1"],</strong>
+["2014-09-08", -7.25, "ce3f971476"],
+["2014-09-08", -54.9, "7195eb1043"],
+["2014-09-09", -16.24, "de0630adab"],
+["2014-09-10", -16.34, "77ff4bd783"],
+["2014-09-11", -32.98, "a0c0f831e4"],
+["2014-09-11", -75.0, "debd43bc7f"],
+<strong>["2014-09-11", -5.69, "9bb784b332"],</strong>
+<strong>["2014-09-11", -8.19, "c66d7eb43c"],</strong>
+["2014-09-12", -5.69, "6f63ac2d16"],
+["2014-09-12", -201.0, "9ff6034ba9"],
+["2014-09-12", -80.0, "746c3354cf"],
+["2014-09-13", -680.0, "0d7f128a46"],
+["2014-09-13", 2000.0, "9297d662dc"],
+["2014-09-14", -12.9, "b994d3b9b8"]]
+                </code></pre>
+              </td>
+
+              <td>
+                <pre><code>
+<strong>["2014-09-08", -54.9, "7195eb1043"],</strong>
+<strong>["2014-09-08", -7.25, "ce3f971476"],</strong>
+["2014-09-08", -30.0, "08ab8e04b1"],
+["2014-09-08", -5.69, "e348925bca"],
+["2014-09-09", -16.24, "de0630adab"],
+["2014-09-10", -16.34, "77ff4bd783"],
+<strong>["2014-09-11", -75.0, "debd43bc7f"],</strong>
+<strong>["2014-09-11", -32.98, "a0c0f831e4"],</strong>
+["2014-09-11", -8.19, "c66d7eb43c"],
+["2014-09-11", -5.69, "9bb784b332"],
+<strong>["2014-09-12", -80.0, "746c3354cf"],</strong>
+["2014-09-12", -201.0, "9ff6034ba9"],
+<strong>["2014-09-12", -5.69, "6f63ac2d16"],</strong>
+["2014-09-13", -680.0, "0d7f128a46"],
+["2014-09-13", 2000.0, "9297d662dc"],
+["2014-09-14", -12.9, "b994d3b9b8"]
+              </code></pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Hey, what's wrong with my <a href="#">Magic</a>?</p>
+        <p>Hey Ruby, Y R U <a href="#">DOING</a>?</p>
+        <p>After some investigation over the <a href="http://svn.ruby-lang.org/repos/ruby/tags/v2_2_2/ChangeLog">ChangeLog</a> of <strong>Ruby 2.2.2</strong>. I found this:
+          <pre>
+Sat Feb  8 21:44:07 2014  Masaki Matsushita  <glass.saga@gmail.com>
+* configure.in: check qsort_r(3) and whether it is GNU version.
+  BSD version has different prototype.
+* util.h: use qsort_r() as ruby_qsort() if it is GNU version.
+* util.c: define ruby_qsort() if needed.
+          </pre>    
+        </p>
+        <p>Not, really sure this is the case, or may be some <strong>CFLAGS=</strong>O2 replaced with O3, for better optimizations on new CPUs.</p>
+        <p>Only GNU users were affected by this behavior. <strong>I repeat no OSX hipsters were hurt while writing this post.</strong></p>
+        <p>And of course the solution was quite simple and intuitive:</p>
+        <pre><code>
+items_list.sort_by!.with_index do |item, index|
+  "#{item.made_on}-#{item.extra[:time]}-#{index}"
+end
+        </code></pre>
+        <p>Thanks for your time, it's late and I'm <b>out</b>.</p>
+        <p><em>Cheers!</em></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/wipxj3">wipxj3</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Minimal Theme</small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+>>>>>>> 1e99927c2e4253bd2a146ad8c4d0ad58c1c86fce
 </html>
